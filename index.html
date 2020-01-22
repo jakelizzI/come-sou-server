@@ -8,6 +8,7 @@
 </head>
 <body>
 
+    <input type="text" id="mes" />
     <input type="button" id="sample" value="送信">
 
     <script>
@@ -26,7 +27,8 @@
         document.addEventListener('DOMContentLoaded',function(e){
             // サーバーにデータを送る
             document.getElementById('sample').addEventListener('click',function(e){
-                sock.send('hello');
+                var mes = document.getElementById('mes').value;
+                sock.send(mes);
             });
         });
     </script>
