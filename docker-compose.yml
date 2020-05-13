@@ -1,0 +1,12 @@
+version: '2'
+services:
+  comesou-server:
+    build: ./server/
+    links:
+      - comesou-view
+    ports:
+      - "5001:5001"
+  comesou-view:
+    build: ./view/
+    ports:
+      - "81:5000"

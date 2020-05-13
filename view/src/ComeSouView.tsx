@@ -15,7 +15,7 @@ class ComeSouView extends React.Component<{}, State> {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.sock = new WebSocket("ws://127.0.0.1:5001");
+    this.sock = new WebSocket("ws://comesou-server:5001");
     this.sock.addEventListener("open", () => {
       console.log("接続成功");
     });
