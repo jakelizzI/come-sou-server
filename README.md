@@ -4,10 +4,13 @@
 
 ## 各アプリケーション
 
-- view : コメントを送信するためのview。シンプルなReactのSPA。
-- server : WebSocketサーバ。アプリやviewからこのサーバに対して接続を行う。
+- view : コメントを送信するためのview。シンプルなReactのSPAです。
+- server : WebSocketサーバです。アプリやviewからこのサーバに対して接続を行う中継地点になります。
 
 ## 使い方
+
+1. UUIDのインプット欄にアプリケーションの設定画面に表示されているUUIDを入力してください。
+2. コメントのインプット欄に送信したいコメントを入力してEnterもしくは送信ボタンを押すと、コメントが流れます。
 
 ### イントラネット
 
@@ -31,6 +34,9 @@ This repository is another "come-sou-app" server application. : https://github.c
 - server : WebSocket server. Applications and views connect to this server.
 
 ## How to use
+
+1. In the UUID input field, enter the UUID as it appears in the application's configuration screen, and then click please give me.
+2. Type the comment you want to send in the comment input field and press Enter or the Send button and your comment will flow.
 
 ### Intranet
 
