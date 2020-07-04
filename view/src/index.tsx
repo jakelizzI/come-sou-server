@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ComeSouView from "./ComeSouView";
+import ComesouView from "./ComesouView";
 import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(<ComeSouView />, document.getElementById("root"));
+ReactDOM.render(<ComesouView />, document.getElementById("root"));
 
 serviceWorker.unregister();

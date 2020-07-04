@@ -1,16 +1,23 @@
 import React from "react";
+import validator from "validator";
 import { Container, Input, Form, Header, Icon, Menu } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import SettingModal from "./SettingModal";
 import connect from './connection';
 import { State } from './interfaces';
 
-class ComeSouView extends React.Component<{}, State> {
+class ComesouView extends React.Component<{}, State> {
   private sock: WebSocket;
 
   constructor(props: Readonly<{}>) {
     super(props);
-    this.state = { uuid: "", comment: "" };
+    // 1文字目がslashのため
+    let uuid = window.location.pathname.substr(1);
+    if (!validator.isUUID(uuid)) {
+      uuid = "";
+      alert("UUIDが読み取れませんでした。")
+    }
+    this.state = { uuid: uuid, comment: "" };
     this.handleCommentChange = this.handleCommentChange.bind(this);
     this.handleUUIDChange = this.handleUUIDChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,6 +54,7 @@ class ComeSouView extends React.Component<{}, State> {
           <Icon name="comments outline" />
           <Header.Content>コメ送</Header.Content>
         </Header>
+        uuid : {this.state.uuid}
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
             <Input
@@ -71,4 +79,4 @@ class ComeSouView extends React.Component<{}, State> {
   }
 }
 
-export default ComeSouView;
+export default ComesouView;
