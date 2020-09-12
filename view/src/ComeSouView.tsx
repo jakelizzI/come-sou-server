@@ -1,34 +1,29 @@
 import React from "react";
 import validator from "validator";
-import { Container, Input, Form, Header, Icon, Menu } from "semantic-ui-react";
+import { Container, Input, Form, Header, Icon, Segment } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
-import SettingModal from "./SettingModal";
 import connect from './connection';
 import { State } from './interfaces';
 
 class ComesouView extends React.Component<{}, State> {
   private sock: WebSocket;
 
-  constructor(props: Readonly<{}>) {
+  constructor(props: Readonly<{uuid: string}>) {
     super(props);
-    // 1文字目がslashのため
-    let uuid = window.location.pathname.substr(1);
-    if (!validator.isUUID(uuid)) {
-      uuid = "";
-      alert("UUIDが読み取れませんでした。")
-    }
+    let uuid = props.uuid;
+    alert(uuid);
+    // if (!validator.isUUID(uuid)) {
+    //   uuid = "";
+    //   alert("UUIDが読み取れませんでした。")
+    // }
     this.state = { uuid: uuid, comment: "" };
     this.handleCommentChange = this.handleCommentChange.bind(this);
-    this.handleUUIDChange = this.handleUUIDChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.sock = connect();
     this.sock.addEventListener("open", () => {
       console.log("接続成功");
     });
-  }
-  handleUUIDChange(event: React.ChangeEvent<HTMLInputElement>) {
-    this.setState({ uuid: event.target.value });
   }
 
   handleCommentChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -47,21 +42,16 @@ class ComesouView extends React.Component<{}, State> {
     const { uuid, comment } = this.state;
     return (
       <Container textAlign="center">
-        <Menu secondary>
-          <SettingModal />
-        </Menu>
         <Header as="h2" icon textAlign="center">
           <Icon name="comments outline" />
           <Header.Content>コメ送</Header.Content>
         </Header>
-        uuid : {this.state.uuid}
+        <Header as="h3" textAlign="center">
+          ※このページのURLを共有することで同じ送り先にコメントを送ることができます。
+        </Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Field>
-            <Input
-              placeholder="UUID"
-              onChange={this.handleUUIDChange}
-              value={uuid}
-            />
+            <Segment secondary>送信先 : {uuid}</Segment>
             <Input
               action={{
                 color: "blue",
