@@ -17,7 +17,12 @@ server.on('connection', (ws, req) => {
   ws.on('message', (data) => {
     const dataObj = JSON.parse(data);
     console.log(`uuid from browser : ${dataObj.uuid}`);
-    clientMap.get(dataObj.uuid).send(dataObj.message);
+    const client = clientMap.get(dataObj.uuid);
+    if (client) {
+        client.send(dataObj.message);
+    } else {
+        console.warn(`I can not find client from the UUID. UUID=${dataObj.uuid}`)
+    }
   });
 
   ws.on('close', function() {
